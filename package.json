@@ -19,5 +19,6 @@
   "homepage": "https://github.com/kdszafranski/code_challenge_pg_sql#readme",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "devDependencies": {}
 }

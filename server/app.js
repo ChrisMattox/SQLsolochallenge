@@ -2,10 +2,13 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var port = process.env.PORT || 3000;
-var connectionString = "postgres://localhost:5432/sigma";
+var bodyParser = require( 'body-parser' );
+var treats = require('./routes/treats');
 
 /*** Build out a module to manage our treats requests. ***/
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/treats', treats);
 
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('./server/public/views/index.html'));
@@ -13,7 +16,7 @@ app.get('/', function(req, res) {
 
 app.use(express.static('./server/public'));
 
-
-app.listen(port, function() {
-  console.log('Server running on port: ', port);
+app.set('port', process.env.PORT || 4000);
+app.listen(app.get('port'), function () {
+  console.log('Listening on port: ', app.get('port'));
 });
